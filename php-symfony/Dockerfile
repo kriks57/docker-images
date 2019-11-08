@@ -1,4 +1,4 @@
-FROM php:7.3-stretch
+FROM php:7.3-fpm-stretch
 
 RUN apt-get update
 RUN apt-get install -y curl libxml2-dev zlib1g-dev libzip-dev
