@@ -40,6 +40,7 @@ RUN apt-get install -y mysql-client
 
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install calendar
