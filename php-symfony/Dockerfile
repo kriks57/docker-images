@@ -1,7 +1,7 @@
 FROM php:7.3-fpm-stretch
 
 RUN apt-get update
-RUN apt-get install -y curl libxml2-dev zlib1g-dev libzip-dev
+RUN apt-get install -y curl libxml2-dev zlib1g-dev libzip-dev libpng-dev libjpeg62-turbo-dev xfonts-75dpi libfreetype6-dev
 
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
@@ -28,22 +28,14 @@ RUN docker-php-ext-install zip
 
 RUN apt-get install -y mysql-client
 
-# RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
-#     docker-php-ext-configure gd \
-#     --with-gd \
-#     --with-freetype-dir=/usr/include/ \
-#     --with-png-dir=/usr/include/ \
-#     --with-jpeg-dir=/usr/include/ && \
-#     NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
-#     docker-php-ext-install -j${NPROC} gd && \
-#     apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+RUN docker-php-ext-configure gd \
+     --with-gd \
+     --with-freetype-dir=/usr/include/ \
+     --with-png-dir=/usr/include/ \
+     --with-jpeg-dir=/usr/include/
+RUN NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && docker-php-ext-install -j${NPROC} gd
 
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install opcache
-RUN docker-php-ext-install soap
-RUN docker-php-ext-install calendar
+RUN docker-php-ext-install mbstring mysqli pdo_mysql opcache soap calendar bcmath
 
 WORKDIR /var/www/symfony
 EXPOSE 9001
