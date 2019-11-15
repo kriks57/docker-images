@@ -9,7 +9,7 @@ COPY symfony.ini /usr/local/etc/php/conf.d/
 ADD symfony.ini /etc/php7/php-fpm.d/
 ADD symfony.ini /etc/php7/cli/conf.d/
 
-COPY symfony.pool.conf /usr/local/etc/pool.d/
+COPY symfony.pool.conf /usr/local/etc/php-fpm.d/
 
 # Possible values for ext-name:
 # bcmath bz2 calendar ctype curl dba dom enchant exif fileinfo filter ftp gd gettext gmp hash iconv imap interbase intl
