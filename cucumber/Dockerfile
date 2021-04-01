@@ -1,4 +1,4 @@
-FROM kriks57/docker-selenium
+FROM kriks57/docker-selenium:test
 
 USER root
 RUN apt-get update && apt-get install -y ruby ruby-dev rubygems libffi-dev clang gcc g++ make mysql-client libmysqld-dev zip
